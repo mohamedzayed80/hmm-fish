@@ -18,9 +18,10 @@
             animation: gradientShift 8s ease-in-out infinite;
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            padding: 2rem 1rem;
+            /* Removed overflow: hidden to allow scrolling */
         }
 
         @keyframes gradientShift {
@@ -31,6 +32,7 @@
         .container {
             text-align: center;
             max-width: 800px;
+            width: 100%;
             padding: 2rem;
             position: relative;
             z-index: 2;
@@ -105,6 +107,11 @@
             margin: 0 auto 3rem;
             opacity: 0;
             animation: fadeInUp 2s ease-out 1.5s forwards;
+            text-align: left;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
         }
 
         .interactive-heart {
@@ -174,6 +181,7 @@
             margin-top: 2rem;
             opacity: 0;
             animation: fadeInUp 2s ease-out 2.5s forwards;
+            text-align: left;
         }
 
         .final-message {
@@ -181,6 +189,68 @@
             color: #8b5a8c;
             font-style: italic;
             margin-top: 1rem;
+        }
+
+        .additional-content {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            text-align: left;
+        }
+
+        .additional-content h3 {
+            color: #d63384;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .additional-content p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: #6c5ce7;
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .scroll-indicator:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        @media (max-width: 768px) {
+            .name-display {
+                font-size: 4rem;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .farewell-message {
+                font-size: 1.1rem;
+                padding: 1rem;
+            }
         }
     </style>
 </head>
@@ -203,8 +273,7 @@
         <div class="farewell-message">
             i miss you so much and i dont know if you are intentonally avoiding me, as i saw you online on discord/reddit while i was spamming u everywhere, so i think it feels bad if i think about it from this perceptive, but i think its normal when people have their space and their alone time, so i dont take this as a reason to be upset  but i cant help but to feel all bad for feeling ur avoiding me
 
-            <br> last week was really bad for me and i didnt tell u about it coz u already had enough on ur plate and this might be why im more feeling bad about it, i also got lost yesterday in a diffierent city, bus driver dropped me in the wrong place, and was kindy funny and tiring and came home around 2 am, i miss u, and i feel so bad that im clueless and left this way, i dont know what ur doing , what ur up to but u seem online alot and i dont know why u wouldnt text me, can u tell me why ? sorry if that too much 
-
+            <br><br> last week was really bad for me and i didnt tell u about it coz u already had enough on ur plate and this might be why im more feeling bad about it, i also got lost yesterday in a diffierent city, bus driver dropped me in the wrong place, and was kindy funny and tiring but not so bad, i miss u, and i feel so bad that im clueless and left this way, i dont know what ur doing , what ur up to but u seem online alot and i dont know why u wouldnt text me, can u tell me why ? 
         </div>
         
         <div class="interactive-heart" onclick="showHeartEffect()" title="Click me">💕</div>
@@ -214,9 +283,11 @@
                 i dont really know whats going on and i tried to talk about things and discuss it so i dont know what to do other than to freak out, 
             </p>
             <p class="final-message" style="margin-top: 1rem; font-weight: bold; color: #d63384;">
-              </p>
+                I just want to understand what's happening...
+            </p>
         </div>
-    </div>
+
+  
 
     <script>
         // Create falling petals
@@ -304,6 +375,24 @@
                 document.head.appendChild(style);
             }
         }
+
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Show/hide scroll indicator based on scroll position
+        window.addEventListener('scroll', function() {
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            if (window.pageYOffset > 300) {
+                scrollIndicator.style.display = 'flex';
+            } else {
+                scrollIndicator.style.display = 'none';
+            }
+        });
 
         // Add some sparkle on page load
         setTimeout(() => {

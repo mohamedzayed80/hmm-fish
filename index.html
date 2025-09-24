@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hallo, smartass</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(-45deg, #ffeef8, #f0e6ff, #e6f3ff, #fff0f5);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease-in-out infinite;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .container {
+            text-align: center;
+            max-width: 800px;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .name-display {
+            font-size: 6rem;
+            font-weight: bold;
+            margin: 2rem 0;
+            cursor: pointer;
+            position: relative;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .name-display:hover {
+            transform: scale(1.05);
+        }
+
+        .letter {
+            display: inline-block;
+            animation: colorShift 3s ease-in-out infinite;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .letter:nth-child(1) { animation-delay: 0s; }
+        .letter:nth-child(2) { animation-delay: 0.3s; }
+        .letter:nth-child(3) { animation-delay: 0.6s; }
+        .letter:nth-child(4) { animation-delay: 0.9s; }
+        .letter:nth-child(5) { animation-delay: 1.2s; }
+
+        @keyframes colorShift {
+            0%, 100% { color: #ff6b9d; transform: translateY(0px); }
+            25% { color: #a8e6cf; transform: translateY(-5px); }
+            50% { color: #ffd93d; transform: translateY(0px); }
+            75% { color: #6c5ce7; transform: translateY(-3px); }
+        }
+
+        .name-display:hover .letter {
+            animation: shake 0.6s ease-in-out infinite;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(-2px) translateY(-2px); }
+            50% { transform: translateX(2px) translateY(0); }
+            75% { transform: translateX(-1px) translateY(2px); }
+        }
+
+        .title {
+            font-size: 2.5rem;
+            color: #8b5a8c;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 2s ease-out 0.5s forwards;
+        }
+
+        .subtitle {
+            font-size: 2rem;
+            color: #d63384;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 2s ease-out 1s forwards;
+        }
+
+        .farewell-message {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #6c5ce7;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            opacity: 0;
+            animation: fadeInUp 2s ease-out 1.5s forwards;
+        }
+
+        .interactive-heart {
+            font-size: 3rem;
+            color: #ff6b9d;
+            cursor: pointer;
+            display: inline-block;
+            transition: all 0.3s ease;
+            margin: 2rem 0;
+            opacity: 0;
+            animation: fadeInUp 2s ease-out 2s forwards;
+        }
+
+        .interactive-heart:hover {
+            transform: scale(1.3);
+            color: #ff1744;
+            filter: drop-shadow(0 0 20px rgba(255, 107, 157, 0.8));
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .floating-petals {
+            position: fixed;
+            top: -10px;
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .petal {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, #ff6b9d, #ffc1e3);
+            border-radius: 50% 0 50% 0;
+            animation: fall linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .memory-box {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 2rem;
+            opacity: 0;
+            animation: fadeInUp 2s ease-out 2.5s forwards;
+        }
+
+        .final-message {
+            font-size: 1.1rem;
+            color: #8b5a8c;
+            font-style: italic;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-petals"></div>
+    
+    <div class="container">
+        <h1 class="title">hallo smartass</h1>
+        
+        <div class="name-display" onclick="triggerSpecialAnimation()">
+            <span class="letter">F</span>
+            <span class="letter">i</span>
+            <span class="letter">s</span>
+            <span class="letter">h</span>
+            <span class="letter">i</span>
+        </div>
+        
+        <h2 class="subtitle">My Cutie, My Princess</h2>
+        
+        <div class="farewell-message">
+            i miss you so much and i dont know if you are intentonally avoiding me, as i saw you online on discord/reddit while i was spamming u everywhere, so i think it feels bad if i think about it from this perceptive, but i think its normal when people have their space and their alone time, so i dont take this as a reason to be upset  but i cant help but to feel all bad for feeling ur avoiding me
+
+            <br> last week was really bad for me and i didnt tell u about it coz u already had enough on ur plate and this might be why im more feeling bad about it, i also got lost yesterday in a diffierent city, bus driver dropped me in the wrong place, and was kindy funny and tiring but not so bad, i miss u, and i feel so bad that im clueless and left this way, i dont know what ur doing , what ur up to but u seem online alot and i dont know why u wouldnt text me, can u tell me why ? 
+
+        </div>
+        
+        <div class="interactive-heart" onclick="showHeartEffect()" title="Click me">💕</div>
+        
+        <div class="memory-box">
+            <p class="final-message">
+                i dont really know whats going on and i tried to talk about things and discuss it so i dont know what to do other than to freak out, 
+            </p>
+            <p class="final-message" style="margin-top: 1rem; font-weight: bold; color: #d63384;">
+              </p>
+        </div>
+    </div>
+
+    <script>
+        // Create falling petals
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            petal.style.left = Math.random() * 100 + '%';
+            petal.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            petal.style.animationDelay = Math.random() * 2 + 's';
+            document.querySelector('.floating-petals').appendChild(petal);
+            
+            // Remove petal after animation
+            setTimeout(() => {
+                if (petal.parentNode) {
+                    petal.parentNode.removeChild(petal);
+                }
+            }, 5000);
+        }
+
+        // Create petals continuously
+        setInterval(createPetal, 300);
+
+        // Special animation for name
+        function triggerSpecialAnimation() {
+            const letters = document.querySelectorAll('.letter');
+            letters.forEach((letter, index) => {
+                setTimeout(() => {
+                    letter.style.transform = 'scale(1.3) rotate(360deg)';
+                    letter.style.color = '#ff1744';
+                    setTimeout(() => {
+                        letter.style.transform = 'scale(1) rotate(0deg)';
+                        letter.style.color = '';
+                    }, 600);
+                }, index * 100);
+            });
+        }
+
+        // Heart effect
+        function showHeartEffect() {
+            const heart = document.querySelector('.interactive-heart');
+            const colors = ['#ff6b9d', '#ff1744', '#ffc1e3', '#d63384', '#8b5a8c'];
+            
+            // Create floating hearts
+            for (let i = 0; i < 8; i++) {
+                const floatingHeart = document.createElement('div');
+                floatingHeart.innerHTML = '💕';
+                floatingHeart.style.position = 'fixed';
+                floatingHeart.style.left = heart.getBoundingClientRect().left + 'px';
+                floatingHeart.style.top = heart.getBoundingClientRect().top + 'px';
+                floatingHeart.style.fontSize = '2rem';
+                floatingHeart.style.pointerEvents = 'none';
+                floatingHeart.style.zIndex = '1000';
+                floatingHeart.style.animation = `floatAway ${1.5 + Math.random()}s ease-out forwards`;
+                
+                // Random direction
+                const angle = (Math.PI * 2 * i) / 8;
+                floatingHeart.style.setProperty('--dx', Math.cos(angle) * 100 + 'px');
+                floatingHeart.style.setProperty('--dy', Math.sin(angle) * 100 + 'px');
+                
+                document.body.appendChild(floatingHeart);
+                
+                setTimeout(() => {
+                    if (floatingHeart.parentNode) {
+                        floatingHeart.parentNode.removeChild(floatingHeart);
+                    }
+                }, 2000);
+            }
+            
+            // Add floating animation keyframes
+            if (!document.getElementById('floatAwayStyle')) {
+                const style = document.createElement('style');
+                style.id = 'floatAwayStyle';
+                style.textContent = `
+                    @keyframes floatAway {
+                        0% {
+                            opacity: 1;
+                            transform: translate(0, 0) scale(1);
+                        }
+                        100% {
+                            opacity: 0;
+                            transform: translate(var(--dx), var(--dy)) scale(0.3);
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+
+        // Add some sparkle on page load
+        setTimeout(() => {
+            triggerSpecialAnimation();
+        }, 3000);
+    </script>
+</body>
+</html>
